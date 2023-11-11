@@ -41,7 +41,10 @@ const HomePage=()=>{
                 },
                 credentials:"include",
                 body:JSON.stringify(data)
-            }).then(res=>res.json()).then(res=>setPersonData(res))
+            }).then(res=>res.json()).then(res=> {
+                console.log(res)
+                setPersonData(res)
+            })
         }
         catch (err){
             console.log("greska")
