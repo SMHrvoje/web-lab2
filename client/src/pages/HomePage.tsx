@@ -67,7 +67,7 @@ const HomePage=()=>{
                     <Form onSubmit={handleSubmit(getData)}>
                         <Stack direction="horizontal" gap={5} className="justify-content-center">
                         <Form.Group>
-                            <Form.Control type="password" placeholder="email" {...register('email')}/>
+                            <Form.Control  placeholder="email" {...register('email')}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Control type="password" placeholder="sigurnosni kod" {...register('securityCode')}/>

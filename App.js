@@ -39,21 +39,22 @@ app.post("/api",async (req,res)=>{
     const securityCode=req.body.securityCode;
     const secure=req.body.secure;
 
-    console.log(req.body)
     try{
         if(secure){
-            const data=await pool.query('select email,firstname,lastname,address,number from EmailPerson where email=$1 and securityword=$2',[email,securityCode])
-            res.json(data.rows)
-            console.log("tu")
+            const data=await pool.query('select email,firstname,lastname,address,number from EmailPerson where email=$1 and passcode=$2',[email,securityCode])
+            if(data.length>0){
+                res.json(data.rows)
+            }
         }
         else{
-            var query = `SELECT email,firstname,lastname,address,number FROM EmailPerson where email='${email}' and securityword='${securityCode}'`;
+            var query = `SELECT email,firstname,lastname,address,number FROM EmailPerson where email='${email}' and passcode='${securityCode}'`;
             const data=await pool.query(query)
-            res.json(data.rows)
+           if(data.length>0){
+               res.json(data.rows)
+           }
         }
     }
     catch (err){
-        console.log(err)
         res.status(500).json({
             message: "Greška pri pristupanju"
         })
@@ -130,8 +131,6 @@ app.post('/api/login/notsecure',async(req, res) => {
 
 })
 app.get('/api/checkLogged', (req, res) => {
-    console.log("check")
-    console.log(req.sessionID)
     if(req.session.email){
         res.json(
             {
