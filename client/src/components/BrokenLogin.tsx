@@ -116,11 +116,11 @@ const BrokenLogin =()=>{
             <Container className="mt-5 justify-content-center">
                 <h4 >Broken authentication</h4>
                 <p>
-                    Podaci za ulaz su john.doe@gmail.com , Fer21
+                    Podaci za ulaz su <b>john.doe@gmail.com , Fer21</b>
                    Jedna od ranjivosti loše autentifikacije su loše poruke sustava. Sustav ispisuje pogreške poput "korisnik ne postoji"
                     ili "pogrešna lozinka" što daje informaciju napadaču. Sustav je ranjiv na brute force napade. Preglednik ima
                     pristup kolačiću sesije nakon što se korisnik prijavi. Kolačić se može ukrasti i napadač se može predstavljati kao
-                    taj korisnik zbog kolačića. Nakon prijave, pritisnite tipku za prikaz kolačića, kada je sustav ranjiv tamo će pisati
+                    taj korisnik zbog kolačića. Nakon prijave, pritisnite <b>tipku za prikaz kolačića</b>, kada je sustav ranjiv tamo će pisati
                     connection.sid vrijednost. Također još jedna ranjivost jest loša invalidacija sesije. Korisnik će nakon odjave biti
                     prividno odjavljen, ali će sesija i dalje postojati. U sučelju će se činiti da više nije prijavljen. Refreshanjem
                     stranice možemo potvrditi da je ostao prijavljen. Tipka force log out je tu da se možemo prisilno odjaviti

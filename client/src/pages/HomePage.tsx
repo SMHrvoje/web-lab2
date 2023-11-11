@@ -56,21 +56,21 @@ const HomePage=()=>{
             <Container className="mt-5 justify-content-center">
                 <h4 >SQL injection</h4>
                 <p>Ranjivost se može upaliti ili ugasiti. Pretraga vraća podatke za korisnika čiji podaci se unesu.
-                Primjer korisnika jest john.doe@gmail.com , Fer21 . Ako je omogućen SQL injection, može se iskoristiti tautologija i upisati
-                    ' or 1=1;-- . Odavde vidimo koliko stupaca se nalazi u upitu. To će vratiti podatke za sve korisnike. Mogu se raditi i union upiti, no prvo je potrebno saznati kako
-                    izgleda tablica iz koje se pretražuju podaci. Prvo unosimo ' UNION SELECT schema_name, null,null,null,null FROM information_schema.schemata;-- kako bismo pronašli koje sheme imamo.
-                    Zatim unosimo ' UNION SELECT table_name, null, null,null,null FROM information_schema.tables WHERE table_schema = 'public';-- kako bismo
-                    saznali koje tablice se nalaze u našoj shemi. Zatim se može upisati ' UNION SELECT column_name, null, null, null, null FROM information_schema.columns WHERE table_name = 'ime_tablice';--
+                Primjer korisnika jest <b>john.doe@gmail.com , Fer21</b> . Ako je omogućen SQL injection, može se iskoristiti tautologija i upisati
+                    <b>' or 1=1;--</b> . Odavde vidimo koliko stupaca se nalazi u upitu. To će vratiti podatke za sve korisnike. Mogu se raditi i union upiti, no prvo je potrebno saznati kako
+                    izgleda tablica iz koje se pretražuju podaci. Prvo unosimo <b>' UNION SELECT schema_name, null,null,null,null FROM information_schema.schemata;--</b> kako bismo pronašli koje sheme imamo.
+                    Zatim unosimo <b>' UNION SELECT table_name, null, null,null,null FROM information_schema.tables WHERE table_schema = 'public';--</b> kako bismo
+                    saznali koje tablice se nalaze u našoj shemi. Zatim se može upisati <b>' UNION SELECT column_name, null, null, null, null FROM information_schema.columns WHERE table_name = 'emailperson';--</b>
                     kako bi pronašli koje stupce sadrži tablica. U bazi se nalazi samo jedna tablica. Ako je uključena sigurnost, radi se
-                    sanitizacija ulaza kako se više ne bi dopuštali takvi upiti.
+                    sanitizacija ulaza kako se više ne bi dopuštali takvi upiti. Za ovu aplikaciju postoji zasebni user kojem su ograničene ovlasti samo na čitanje iz tablica.
                 </p>
                     <Form onSubmit={handleSubmit(getData)}>
                         <Stack direction="horizontal" gap={5} className="justify-content-center">
                         <Form.Group>
-                            <Form.Control placeholder="email" {...register('email')}/>
+                            <Form.Control type="password" placeholder="email" {...register('email')}/>
                         </Form.Group>
                         <Form.Group>
-                            <Form.Control placeholder="sigurnosni kod" {...register('securityCode')}/>
+                            <Form.Control type="password" placeholder="sigurnosni kod" {...register('securityCode')}/>
                         </Form.Group>
                             <Form.Group>
                                 <Form.Switch

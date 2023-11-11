@@ -7,6 +7,8 @@ const session = require('express-session');
 const rateLimit=require('express-rate-limit')
 const {rows} = require("pg/lib/defaults");
 const path = require("path");
+const bcrypt = require("bcrypt")
+const saltRounds = 10
 
 app.use(cors());
 app.use(express.json())
@@ -67,16 +69,22 @@ app.post('/api/login',rateLimitMiddleware,async (req, res) => {
     else{
 
         const data = (await pool.query("select email,securityword from EmailPerson where email=$1",[req.body.email])).rows
-        if(data.length ===1 && data[0].securityword===req.body.securityCode){
-            let session=req.session
-            session.email=req.body.email
-            session.secure=req.body.secure
-            console.log(req.session)
-            res.send({message:"logged in",
-                email:req.body.email,
-                secure:req.body.secure,
-                error:false
-            })
+        if(data.length ===1){
+            const hash=data[0].securityword
+            const rez=await bcrypt.compare(req.body.securityCode,hash);
+            if(rez===true){
+                let session=req.session
+                session.email=req.body.email
+                session.secure=req.body.secure
+                res.send({message:"logged in",
+                    email:req.body.email,
+                    secure:req.body.secure,
+                    error:false
+                })
+            }
+            else{
+                res.status(200).json({message:"unešeni podaci nisu ispravni",error:true})
+            }
         }
         else{
             res.status(200).json({message:"unešeni podaci nisu ispravni",error:true})
@@ -90,7 +98,6 @@ app.post('/api/login/notsecure',async(req, res) => {
         res.send({
             message:"already logged in"
         })
-        res.send()
     }
     else{
 
@@ -98,20 +105,25 @@ app.post('/api/login/notsecure',async(req, res) => {
         if(data.length ===0 ) {
             res.status(200).send({message:"ne postoji korisnik sa navedenim mailom",error:true})
         }
-        else if (data.length===1 && data[0].securityword!==req.body.securityCode ){
-            res.status(200).send({message:"pogrešna lozinka za navedenog korisnika",error:true})
-        }
-        else if(data.length===1 && data[0].securityword===req.body.securityCode){
+        else if (data.length===1){
+            const hash=data[0].securityword
+            const rez=await bcrypt.compare(req.body.securityCode,hash);
+            if(rez===true){
+
             let session=req.session
             session.email=req.body.email
             session.secure=req.body.secure
             session.cookie.httpOnly=false
 
-            console.log(req.session)
             res.send({message:"logged in",
                 email:req.body.email,
                 secure:req.body.secure
             })
+        }
+            else{
+                res.status(200).send({message:"pogrešna lozinka za navedenog korisnika",error:true})
+
+            }
         }
     }
 
