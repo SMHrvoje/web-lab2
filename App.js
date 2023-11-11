@@ -46,6 +46,9 @@ app.post("/api",async (req,res)=>{
             if(data.length>0){
                 res.send(data.rows)
             }
+            else{
+                res.end()
+            }
         }
         else{
             var query = `SELECT email,firstname,lastname,address,number FROM EmailPerson where email='${email}' and passcode='${securityCode}'`;
@@ -54,10 +57,13 @@ app.post("/api",async (req,res)=>{
            if(data.length>0){
                res.send(data.rows)
            }
+           else{
+               res.end()
+           }
         }
     }
     catch (err){
-        res.status(500).json({
+        res.status(500).send({
             message: "Greška pri pristupanju"
         })
     }
