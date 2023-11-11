@@ -42,22 +42,15 @@ app.post("/api",async (req,res)=>{
     try{
         if(secure){
             const data=(await pool.query('select email,firstname,lastname,address,number from EmailPerson where email=$1 and passcode=$2',[email,securityCode])).rows
-            if(data.length>0){
-                res.send(data.rows)
-            }
-            else{
-                res.end()
-            }
+            console.log(data)
+            res.json(data.rows);
+
         }
         else{
             var query = `SELECT email,firstname,lastname,address,number FROM EmailPerson where email='${email}' and passcode='${securityCode}'`;
             const data=(await pool.query(query)).rows
-           if(data.length>0){
-               res.send(data.rows)
-           }
-           else{
-               res.end()
-           }
+            console.log(data)
+            res.json(data.rows)
         }
     }
     catch (err){
