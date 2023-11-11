@@ -116,7 +116,7 @@ const BrokenLogin =()=>{
             <Container className="mt-5 justify-content-center">
                 <h4 >Broken authentication</h4>
                 <p>
-                    Podaci za ulaz su <b>john.doe@gmail.com , Fer21</b>
+                    Podaci za ulaz su <b>john.doe@gmail.com , Fer21 </b>
                    Jedna od ranjivosti loše autentifikacije su loše poruke sustava. Sustav ispisuje pogreške poput "korisnik ne postoji"
                     ili "pogrešna lozinka" što daje informaciju napadaču. Sustav je ranjiv na brute force napade. Preglednik ima
                     pristup kolačiću sesije nakon što se korisnik prijavi. Kolačić se može ukrasti i napadač se može predstavljati kao
@@ -127,7 +127,7 @@ const BrokenLogin =()=>{
                     iz takvog slučaja jer nebi više mogli drugo isprobavati. Kada je sigurnost upaljena sustav drugačije reagira na sve navedene
                     situacije. Sustav ispisuje grešku "unešeni podaci nisu ispravni" koja ne daje napadaču informacije. Ograničen
                     je broj pokušaja prijava sa svake ip adrese u vremenskom intervalu i tako onemogućen brute force napad. Za demonstraciju
-                    unesite pogrešne podatke i pritisnite login zaredom barem 6 puta i stavit će vas se na odbijanje na neko vrijeme.
+                    unesite pogrešne podatke i pritisnite login zaredom <b>barem 6 puta</b> i stavit će vas se na odbijanje na neko vrijeme.
                     Na sigurnom načinu ne može se pristupiti connection.sid informaciji iz skripte. Klikom na tipku za prikaz kolačića vidjet
                     će se da nedostaje connection.sid. Odjava u sigurnom načinu na ispravan način završava sesiju. Postoji još puno
                     stvari koje spadaju pod slabu autentifikaciju, ali nije navedeno koliko ih treba implementirati.
@@ -138,7 +138,7 @@ const BrokenLogin =()=>{
                             <Form.Control className={errors.email && "border-warning"} disabled={email!==""} placeholder="email" {...register('email',{required:true})}/>
                         </Form.Group>
                         <Form.Group>
-                            <Form.Control className={errors.securityCode && "border-warning"} disabled={email!==""} placeholder="sigurnosni kod" {...register('securityCode',{required:true})}/>
+                            <Form.Control type="password" className={errors.securityCode && "border-warning"} disabled={email!==""} placeholder="sigurnosni kod" {...register('securityCode',{required:true})}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Switch
