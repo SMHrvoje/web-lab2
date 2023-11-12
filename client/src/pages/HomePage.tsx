@@ -64,7 +64,8 @@ const HomePage=()=>{
                     izgleda tablica iz koje se pretražuju podaci. Prvo unosimo <b>' UNION SELECT schema_name, null,null,null,null FROM information_schema.schemata;--</b> kako bismo pronašli koje sheme imamo.
                     Zatim unosimo <b>' UNION SELECT table_name, null, null,null,null FROM information_schema.tables WHERE table_schema = 'public';--</b> kako bismo
                     saznali koje tablice se nalaze u našoj shemi. Zatim se može upisati <b>' UNION SELECT column_name, null, null, null, null FROM information_schema.columns WHERE table_name = 'emailperson';--</b>
-                    kako bi pronašli koje stupce sadrži tablica. U bazi se nalazi samo jedna tablica. Ako je uključena sigurnost, radi se
+                    kako bi pronašli koje stupce sadrži tablica. U bazi se nalazi samo jedna tablica. Upit tipa <b>' UNION SELECT securityword,email,number,null,null
+                     from emailperson;--</b> vratio bi osjetljive podatke korisnika. Ako je uključena sigurnost, radi se
                     sanitizacija ulaza kako se više ne bi dopuštali takvi upiti. Za ovu aplikaciju postoji zasebni user kojem su ograničene ovlasti samo na čitanje iz tablica.
                 </p>
                     <Form onSubmit={handleSubmit(getData)}>

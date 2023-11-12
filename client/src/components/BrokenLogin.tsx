@@ -129,8 +129,8 @@ const BrokenLogin =()=>{
                     je broj pokušaja prijava sa svake ip adrese u vremenskom intervalu i tako onemogućen brute force napad. Za demonstraciju
                     unesite pogrešne podatke i pritisnite login zaredom <b>barem 6 puta</b> i stavit će vas se na odbijanje na neko vrijeme.
                     Na sigurnom načinu ne može se pristupiti connection.sid informaciji iz skripte. Klikom na tipku za prikaz kolačića vidjet
-                    će se da nedostaje connection.sid. Odjava u sigurnom načinu na ispravan način završava sesiju. Postoji još puno
-                    stvari koje spadaju pod slabu autentifikaciju, ali nije navedeno koliko ih treba implementirati.
+                    će se da nedostaje connection.sid. Odjava u sigurnom načinu na ispravan način završava sesiju. Lozinke nisu spremljene
+                    u plain text obliku.
                 </p>
                 <Form onSubmit={handleSubmit(getData)}>
                     <Stack direction="horizontal" gap={5} className="justify-content-center">
